@@ -1,114 +1,152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>우수현 포트폴리오</title>
-  <meta name="color-scheme" content="light dark">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <!-- Pretendard -->
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" rel="stylesheet">
+  <!-- Tailwind CDN -->
+  <script>
+    tailwind = { darkMode: 'class' };
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
-      theme: { extend: { colors: { brand: '#002D56', gold: '#D4AF37' }, boxShadow: { glass: '0 20px 60px -20px rgba(0,0,0,0.45)' } } }
-    };
+      theme: {
+        extend: {
+          colors: {
+            brand: '#002D56' /* R0 G45 B86 */
+          }
+        }
+      }
+    }
   </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    body { font-family: Pretendard, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Apple SD Gothic Neo, Arial, sans-serif; letter-spacing:-0.01em }
-    .glass-wrap::before{ content:''; position:absolute; inset:-16px; border-radius:24px; background: rgba(255,255,255,0.28); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: var(--tw-shadow), var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000); border:1px solid rgba(0,0,0,.08) }
-    .dark .glass-wrap::before{ background: rgba(15,23,42,0.25); border-color: rgba(255,255,255,.1) }
-    .glass-inner{ position:relative; border-radius:20px; border:1px solid rgba(255,255,255,.3); background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.18)) }
-    .dark .glass-inner{ border-color: rgba(255,255,255,.1) }
-    .geo-bg{ position:absolute; inset:0; pointer-events:none; z-index:0 }
-    .reveal-enter{ opacity:0; transform:translateY(36px); transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1) }
-    [data-revealed="true"] .reveal-enter{ opacity:1; transform:none }
-    .hover-magnet{ transition: transform .2s ease, color .2s ease }
-    .hover-magnet:hover{ transform: translateY(-2px) scale(1.02); color:#D4AF37 }
-    .tag{ border:1px solid rgba(15,23,42,.12) }
-    .dark .tag{ border-color: rgba(203,213,225,.2) }
-    .modal{ position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:stretch; justify-content:stretch; z-index:70 }
-    .modal.open{ display:flex }
-    .modal-box{ margin:24px; border-radius:16px; overflow:hidden; background:#fff }
-    .dark .modal-box{ background:#0b1220 }
-    .fade-section{ transition: opacity .3s ease }
-    .fade-section.hidden{ opacity:0; pointer-events:none }
+    html,body{font-family:Pretendard,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Apple SD Gothic Neo,Arial,sans-serif}
+    .glass-ring{box-shadow:0 20px 60px -20px rgba(0,0,0,.45)}
+    .fade-section{transition:opacity .3s ease}
+    .fade-out{opacity:0;pointer-events:none}
   </style>
-  <script>
-    (function(){
-      const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = stored || (prefersDark ? 'dark' : 'light');
-      if(theme === 'dark') document.documentElement.classList.add('dark');
-    })();
-  </script>
 </head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100" data-revealed="false">
+<body class="bg-white text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- 헤더 -->
   <header class="sticky top-0 z-30 backdrop-blur bg-white/60 dark:bg-slate-950/60 border-b border-slate-200/50 dark:border-slate-800/60">
     <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <a href="#" id="btn-home" class="font-bold text-lg tracking-tight hover-magnet">우수현</a>
+        <a href="#top" id="logo" class="font-bold text-lg tracking-tight hover:text-amber-400 transition">
+          우수현
+        </a>
         <span class="hidden sm:inline text-sm text-slate-500 dark:text-slate-400">· 경제정책·시장 해석 | 주식 리서치</span>
       </div>
-      <nav class="hidden md:flex items-center gap-5">
-        <a href="#profile" class="px-3 py-1.5 rounded-md text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/50">Profile</a>
-        <a href="#experience" class="px-3 py-1.5 rounded-md text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/50">Career</a>
-        <a href="#projects" class="px-3 py-1.5 rounded-md text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/50">Projects</a>
-        <a href="#writing" class="px-3 py-1.5 rounded-md text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/50">Writing</a>
-        <a href="#proof" class="px-3 py-1.5 rounded-md text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/50">Proof</a>
-        <a href="#contact" class="px-3 py-1.5 rounded-md text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/50">Contact</a>
-        <button id="btn-theme" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm hover:bg-slate-100/60 dark:hover:bg-slate-800/50">
-          <span id="theme-icon">🌞</span><span class="hidden sm:inline">테마</span>
+      <nav class="hidden md:flex items-center gap-4">
+        <a class="px-3 py-1.5 rounded-md text-sm hover:bg-slate-100/60 dark:hover:bg-slate-800/50" data-scroll="#profile">Profile</a>
+        <a class="px-3 py-1.5 rounded-md text-sm hover:bg-slate-100/60 dark:hover:bg-slate-800/50" data-scroll="#experience">Career</a>
+        <a class="px-3 py-1.5 rounded-md text-sm hover:bg-slate-100/60 dark:hover:bg-slate-800/50" data-scroll="#projects">Projects</a>
+        <a class="px-3 py-1.5 rounded-md text-sm hover:bg-slate-100/60 dark:hover:bg-slate-800/50" data-scroll="#writing">Writing</a>
+        <a class="px-3 py-1.5 rounded-md text-sm hover:bg-slate-100/60 dark:hover:bg-slate-800/50" data-scroll="#proof">Proof</a>
+        <a class="px-3 py-1.5 rounded-md text-sm hover:bg-slate-100/60 dark:hover:bg-slate-800/50" data-scroll="#contact">Contact</a>
+        <button id="themeBtn" class="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-md hover:bg-slate-100/60 dark:hover:bg-slate-800/50">
+          <i data-lucide="sun" class="h-4 w-4"></i><span class="hidden sm:inline">테마</span>
         </button>
       </nav>
+      <button id="themeBtnSm" class="md:hidden inline-flex items-center gap-1 px-3 py-1.5 rounded-md hover:bg-slate-100/60 dark:hover:bg-slate-800/50">
+        <i data-lucide="sun" class="h-4 w-4"></i><span class="hidden sm:inline">테마</span>
+      </button>
     </div>
   </header>
 
-  <section class="relative overflow-hidden min-h-[78vh] md:min-h-[82vh]">
-    <svg class="geo-bg hidden dark:block" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice">
-      <defs><linearGradient id="goldD" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#CDAF4A"/><stop offset="100%" stop-color="#B18E2E"/></linearGradient></defs>
-      <g opacity="0.18"><circle cx="240" cy="120" r="140" fill="url(#goldD)"/><rect x="1020" y="80" width="220" height="220" fill="#1B2A49" rx="24"/></g>
-      <g opacity="0.22"><polygon points="0,720 260,720 0,460" fill="#1B2A49"/><circle cx="1240" cy="600" r="180" fill="url(#goldD)"/></g>
-      <g opacity="0.30"><rect x="700" y="180" width="16" height="220" fill="url(#goldD)" rx="8"/><rect x="732" y="180" width="16" height="220" fill="url(#goldD)" rx="8"/><rect x="764" y="180" width="16" height="220" fill="url(#goldD)" rx="8"/></g>
+  <!-- 히어로 -->
+  <div id="top"></div>
+  <section class="relative overflow-hidden bg-white dark:bg-slate-900 min-h-[78vh] md:min-h-[82vh]">
+    <!-- 배경 도형 -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none block dark:hidden" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D4AF37"/><stop offset="100%" stop-color="#C59A2A"/></linearGradient>
+      </defs>
+      <rect width="1440" height="720" fill="none"/>
+      <g opacity=".16">
+        <circle cx="240" cy="120" r="140" fill="url(#goldL)"/>
+        <rect x="1020" y="80" width="220" height="220" rx="24" fill="#0E224E"/>
+      </g>
+      <g opacity=".20">
+        <polygon points="0,720 260,720 0,460" fill="#0E224E"/>
+        <circle cx="1240" cy="600" r="180" fill="url(#goldL)"/>
+      </g>
+      <g opacity=".28">
+        <rect x="700" y="180" width="16" height="220" rx="8" fill="url(#goldL)"/>
+        <rect x="732" y="180" width="16" height="220" rx="8" fill="url(#goldL)"/>
+        <rect x="764" y="180" width="16" height="220" rx="8" fill="url(#goldL)"/>
+      </g>
     </svg>
-    <svg class="geo-bg block dark:hidden" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice">
-      <defs><linearGradient id="goldL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D4AF37"/><stop offset="100%" stop-color="#C59A2A"/></linearGradient></defs>
-      <g opacity="0.16"><circle cx="240" cy="120" r="140" fill="url(#goldL)"/><rect x="1020" y="80" width="220" height="220" fill="#0E224E" rx="24"/></g>
-      <g opacity="0.20"><polygon points="0,720 260,720 0,460" fill="#0E224E"/><circle cx="1240" cy="600" r="180" fill="url(#goldL)"/></g>
-      <g opacity="0.28"><rect x="700" y="180" width="16" height="220" fill="url(#goldL)" rx="8"/><rect x="732" y="180" width="16" height="220" fill="url(#goldL)" rx="8"/><rect x="764" y="180" width="16" height="220" fill="url(#goldL)" rx="8"/></g>
+    <svg class="absolute inset-0 w-full h-full pointer-events-none hidden dark:block" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldD" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#CDAF4A"/><stop offset="100%" stop-color="#B18E2E"/></linearGradient>
+      </defs>
+      <rect width="1440" height="720" fill="none"/>
+      <g opacity=".18">
+        <circle cx="240" cy="120" r="140" fill="url(#goldD)"/>
+        <rect x="1020" y="80" width="220" height="220" rx="24" fill="#1B2A49"/>
+      </g>
+      <g opacity=".22">
+        <polygon points="0,720 260,720 0,460" fill="#1B2A49"/>
+        <circle cx="1240" cy="600" r="180" fill="url(#goldD)"/>
+      </g>
+      <g opacity=".30">
+        <rect x="700" y="180" width="16" height="220" rx="8" fill="url(#goldD)"/>
+        <rect x="732" y="180" width="16" height="220" rx="8" fill="url(#goldD)"/>
+        <rect x="764" y="180" width="16" height="220" rx="8" fill="url(#goldD)"/>
+      </g>
     </svg>
 
     <div class="relative z-10 mx-auto max-w-6xl px-4 pt-20 md:pt-28 pb-56 md:pb-72 grid grid-cols-1 md:[grid-template-columns:1.1fr_0.9fr] gap-8 items-start">
-      <div class="relative glass-wrap">
-        <div class="glass-inner p-6 shadow-glass">
-          <h1 class="text-2xl md:text-4xl font-extrabold leading-tight tracking-tight text-slate-900 dark:text-slate-100">우수현 포트폴리오</h1>
+      <!-- 유리 카드 -->
+      <div class="relative">
+        <div class="absolute -inset-4 md:-inset-6 rounded-[28px] bg-white/28 dark:bg-slate-800/25 backdrop-blur-3xl ring-1 ring-black/10 dark:ring-white/10 glass-ring"></div>
+        <div class="relative">
+          <h1 class="text-2xl md:text-4xl font-extrabold leading-tight tracking-tight">우수현 포트폴리오</h1>
           <p class="mt-2 text-lg font-bold text-slate-700 dark:text-slate-300">Woo's Portfolio</p>
-          <div class="mt-6 text-base text-slate-700 dark:text-slate-300 max-w-xl space-y-2">
-            <p>한국외국어대학교 융합일본지역/경제학 전공. 교내 학회·연합동아리·대외활동에서 기업/산업 리서치와 자료 제작을 수행했습니다.</p>
-            <p>데이터 가공·시각화와 IR/뉴스 해석을 기반으로 신속하고 구조화된 리포트를 만듭니다.</p>
+          <div class="mt-6 text-base text-slate-700 dark:text-slate-300 max-w-xl">
+            <span class="block">한국외국어대학교 융합일본지역/경제학 전공.</span>
+            <span class="block">교내 학회·연합동아리·대외활동에서 기업/산업 리서치와 자료 제작을 수행했습니다.</span>
+            <span class="block">데이터 가공·시각화와 IR/뉴스 해석을 기반으로 신속하고 구조화된 리포트를 만듭니다.</span>
           </div>
           <div class="mt-6 grid gap-2 text-sm">
-            <div class="inline-flex items-center gap-2 text-slate-800 dark:text-slate-200">📞 010-9508-9986</div>
-            <a href="mailto:sa0110984@naver.com" class="inline-flex items-center gap-2 text-slate-800 dark:text-slate-200 hover-magnet">✉️ sa0110984@naver.com</a>
+            <div class="inline-flex items-center gap-2"><i data-lucide="phone" class="h-4 w-4"></i> 010-9508-9986</div>
+            <a href="mailto:sa0110984@naver.com" class="inline-flex items-center gap-2 hover:text-amber-400 transition">
+              <i data-lucide="mail" class="h-4 w-4"></i> sa0110984@naver.com
+            </a>
           </div>
           <div class="mt-6 flex items-center gap-3">
-            <a href="resume.pdf" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-slate-900 border border-slate-200/60 shadow-sm hover-magnet">📄 Resume</a>
-            <a href="https://instagram.com/diarchiveov" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-slate-900 border border-slate-200/60 shadow-sm hover-magnet">📷 Instagram</a>
-            <a href="#profile" id="btn-start" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-brand text-white shadow hover:bg-brand/90 hover:text-white hover-magnet">Get Started ⬇️</a>
+            <a href="/resume.pdf" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-slate-900 border border-slate-200/60 shadow-sm hover:shadow transition">
+              <i data-lucide="file-text" class="h-4 w-4"></i> Resume
+            </a>
+            <a href="https://instagram.com/diarchiveov" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white text-slate-900 border border-slate-200/60 shadow-sm hover:shadow transition">
+              <i data-lucide="instagram" class="h-4 w-4"></i> Instagram
+            </a>
+            <a class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-brand text-white shadow hover:bg-brand/90" data-scroll="#profile">
+              Get Started <i data-lucide="arrow-down" class="h-4 w-4"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      <aside class="justify-self-end self-start w-full md:w-[150px] max-w-[150px]">
-        <div class="relative glass-wrap">
-          <div class="glass-inner p-4">
+      <!-- 퀵링크 (좁은 폭) -->
+      <aside class="md:justify-self-end self-start w-full md:w-[150px] max-w-[150px]">
+        <div class="relative">
+          <div class="absolute -inset-3 md:-inset-4 rounded-[24px] bg-white/28 dark:bg-slate-800/25 backdrop-blur-2xl ring-1 ring-black/10 dark:ring-white/10"></div>
+          <div class="relative rounded-[20px] border border-white/30 dark:border-white/10 p-4" style="background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.18))">
             <h3 class="font-semibold text-lg mb-2 text-brand">Quick Links</h3>
-            <ul class="space-y-3 text-base">
-              <li><a class="hover-magnet inline-flex items-center gap-2 whitespace-nowrap" href="#profile">→ Profile</a></li>
-              <li><a class="hover-magnet inline-flex items-center gap-2 whitespace-nowrap" href="#experience">→ Career</a></li>
-              <li><a class="hover-magnet inline-flex items-center gap-2 whitespace-nowrap" href="#projects">→ Projects</a></li>
-              <li><a class="hover-magnet inline-flex items-center gap-2 whitespace-nowrap" href="#writing">→ Writing</a></li>
-              <li><a class="hover-magnet inline-flex items-center gap-2 whitespace-nowrap" href="#proof">→ Proof</a></li>
-              <li><a class="hover-magnet inline-flex items-center gap-2 whitespace-nowrap" href="#contact">→ Contact</a></li>
+            <ul class="space-y-3">
+              <li><a class="inline-flex items-center gap-2 whitespace-nowrap hover:text-amber-400 transition" data-scroll="#profile">→ Profile</a></li>
+              <li><a class="inline-flex items-center gap-2 whitespace-nowrap hover:text-amber-400 transition" data-scroll="#experience">→ Career</a></li>
+              <li><a class="inline-flex items-center gap-2 whitespace-nowrap hover:text-amber-400 transition" data-scroll="#projects">→ Projects</a></li>
+              <li><a class="inline-flex items-center gap-2 whitespace-nowrap hover:text-amber-400 transition" data-scroll="#writing">→ Writing</a></li>
+              <li><a class="inline-flex items-center gap-2 whitespace-nowrap hover:text-amber-400 transition" data-scroll="#proof">→ Proof</a></li>
+              <li><a class="inline-flex items-center gap-2 whitespace-nowrap hover:text-amber-400 transition" data-scroll="#contact">→ Contact</a></li>
             </ul>
           </div>
         </div>
@@ -116,240 +154,257 @@
     </div>
   </section>
 
-  <main id="main" class="mx-auto max-w-6xl px-4 hidden">
-    <section id="profile" class="pt-16 md:pt-28 fade-section">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-4 tracking-tight">Profile</h2>
-      <div class="grid md:grid-cols-[1fr,2fr] gap-6 items-start reveal-enter">
+  <!-- 본문 (처음엔 숨김) -->
+  <main id="main" class="hidden mx-auto max-w-6xl px-4">
+    <section id="profile" class="fade-section pt-16 md:pt-28">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight">Profile</h2>
+      <div class="grid md:grid-cols-[1fr,2fr] gap-6 items-start">
         <div>
-          <div class="relative w-40 h-40 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden grid place-items-center text-[10px] text-slate-500 dark:text-slate-400">Image</div>
+          <div class="w-40 h-40 rounded-full bg-slate-200 dark:bg-slate-800 grid place-items-center">Image</div>
         </div>
         <div class="leading-relaxed text-slate-700 dark:text-slate-300">
           한국외국어대학교 융합일본지역/경제학 전공.
-          <span class="whitespace-nowrap">일본 도쿄 소재 조치대학교(上智大学, Sophia University)</span>
-          교환학생(2024.09–2025.01) 경험이 있으며, 학내 학회와 연합 동아리, 대외활동에서 리서치와 콘텐츠 제작을 병행했습니다.
+          <span class="whitespace-nowrap"> 일본 도쿄 소재 조치대학교(上智大学, Sophia University)</span> 교환학생(2024.09–2025.01) 경험이 있으며, 학내 학회와 연합 동아리, 대외활동에서 리서치와 콘텐츠 제작을 병행했습니다.
+          <div class="mt-3 text-sm text-slate-600 dark:text-slate-300">자격/스킬: JLPT N1(114점) · 투자자산운용사(2024.03.21 합격) · Excel/PowerPoint/Word – 중급, 데이터 가공·시각화</div>
         </div>
       </div>
-      <div class="mt-3 text-sm text-slate-600 dark:text-slate-300">자격/스킬: JLPT N1 (114점) · 투자자산운용사(2024.03.21 합격) · Excel/PowerPoint/Word – 중급</div>
     </section>
 
-    <section id="focus" class="mt-10 fade-section">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-4 tracking-tight text-[#002D56]">Focus</h2>
-      <div class="grid md:grid-cols-3 gap-4 reveal-enter">
-        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5 shadow-sm">
+    <section class="fade-section mt-10" id="focus">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight text-brand">Focus</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5">
           <h3 class="font-semibold text-brand mb-2">글로벌 주식 리서치</h3>
           <ul class="text-sm space-y-2 list-disc list-inside text-slate-700 dark:text-slate-300">
-            <li>기업/산업 구조 파악, IR/공시 문서 요약</li>
-            <li>경쟁구도·리스크 요인 정리 및 투자포인트 도출</li>
+            <li>기업/산업 구조 파악, IR/공시 문서 요약</li><li>경쟁구도·리스크 요인 정리 및 투자포인트 도출</li>
           </ul>
         </div>
-        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5 shadow-sm">
+        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5">
           <h3 class="font-semibold text-brand mb-2">정책·시장 해석</h3>
           <ul class="text-sm space-y-2 list-disc list-inside text-slate-700 dark:text-slate-300">
-            <li>통상/규제/거시 이슈가 섹터·기업 재무에 미치는 영향 요약</li>
-            <li>뉴스 플로우·컨퍼런스콜 요약자료 제작</li>
+            <li>통상/규제/거시 이슈가 섹터·기업 재무에 미치는 영향 요약</li><li>뉴스 플로우·컨퍼런스콜 요약자료 제작</li>
           </ul>
         </div>
-        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5 shadow-sm">
+        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5">
           <h3 class="font-semibold text-brand mb-2">자료 제작/시각화</h3>
           <ul class="text-sm space-y-2 list-disc list-inside text-slate-700 dark:text-slate-300">
-            <li>엑셀·PPT 중심 데이터 가공/차트/도식화</li>
-            <li>카드뉴스·보고서·발표자료 템플릿 제작</li>
+            <li>엑셀·PPT 중심 데이터 가공/차트/도식화</li><li>카드뉴스·보고서·발표자료 템플릿 제작</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="mt-10 fade-section">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-4 tracking-tight">Career (학력·경력·활동)</h2>
-      <div class="grid md:grid-cols-2 gap-4 reveal-enter">
-        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5 shadow-sm">
-          <div class="grid grid-cols-[1fr,6rem] grid-rows-[auto,auto] gap-x-3 gap-y-2 items-start">
-            <div class="col-span-2">
-              <div class="font-semibold text-base md:text-lg tracking-tight text-brand">
-                증권투자연구회 POSTRADE <span class="text-sm font-normal text-slate-600 dark:text-slate-300">(리서치팀)</span>
-              </div>
-            </div>
-            <div class="row-start-2">
-              <dl class="space-y-2">
-                <div><dt class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">기간</dt><dd class="text-sm text-slate-700 dark:text-slate-300">2025.03 –</dd></div>
-                <div><dt class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">소속</dt><dd class="text-sm text-slate-700 dark:text-slate-300">한국외국어대학교</dd></div>
-                <div><dt class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">내용</dt><dd><ul class="mt-1 space-y-1 text-sm list-disc list-inside text-slate-700 dark:text-slate-300"><li>기업/산업 리서치, 보고서 제작</li></ul></dd></div>
-              </dl>
-            </div>
-            <div class="row-start-2 justify-self-end self-start w-24 h-24 rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 bg-slate-100 dark:bg-slate-900/40 grid place-items-center text-[10px] text-slate-500 dark:text-slate-400">Image</div>
+    <section class="fade-section mt-10" id="experience">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight">Career (학력·경력·활동)</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <!-- 카드 하나 예시 (필요만큼 복제/수정) -->
+        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5">
+          <div class="font-semibold text-brand">증권투자연구회 POSTRADE (리서치팀)</div>
+          <div class="mt-2 text-sm text-slate-700 dark:text-slate-300">
+            <div>기간: 2025.03 – </div>
+            <div>소속: 한국외국어대학교</div>
+            <ul class="list-disc list-inside mt-1"><li>기업/산업 리서치, 보고서 제작</li></ul>
           </div>
         </div>
 
-        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5 shadow-sm">
-          <div class="grid grid-cols-[1fr,6rem] grid-rows-[auto,auto] gap-x-3 gap-y-2 items-start">
-            <div class="col-span-2">
-              <div class="font-semibold text-base md:text-lg tracking-tight text-brand">
-                업비트 대학생 서포터즈 업투 2기 <span class="text-sm font-normal text-slate-600 dark:text-slate-300">(우수활동팀)</span>
-              </div>
-            </div>
-            <div class="row-start-2">
-              <dl class="space-y-2">
-                <div><dt class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">기간</dt><dd class="text-sm text-slate-700 dark:text-slate-300">2023.09 – 2023.12</dd></div>
-                <div><dt class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">소속</dt><dd class="text-sm text-slate-700 dark:text-slate-300">두나무</dd></div>
-                <div><dt class="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">내용</dt><dd><ul class="mt-1 space-y-1 text-sm list-disc list-inside text-slate-700 dark:text-slate-300"><li>가상자산·Web3 카드뉴스/기사 제작</li></ul></dd></div>
-              </dl>
-            </div>
-            <div class="row-start-2 justify-self-end self-start w-24 h-24 rounded-xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 bg-slate-100 dark:bg-slate-900/40 grid place-items-center text-[10px] text-slate-500 dark:text-slate-400">Image</div>
+        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5">
+          <div class="font-semibold text-brand">미래내일 일경험(비트코인 ETF 국내 도입 필요성 연구)</div>
+          <div class="mt-2 text-sm text-slate-700 dark:text-slate-300">
+            <div>기간: 2024.05 – 2024.06</div>
+            <div>소속: 한국경제인협회</div>
+            <ul class="list-disc list-inside mt-1"><li>정책·시장 리서치 과제 수행</li></ul>
           </div>
         </div>
+        <!-- ...다른 항목들 이어서 -->
       </div>
     </section>
 
-    <section id="projects" class="mt-10 fade-section">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-4 tracking-tight">Projects (리서치 & 노트)</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 reveal-enter">
-        <a href="#" data-embed="docs/bitcoin-etf.pdf" class="group block rounded-2xl border border-slate-200/60 dark:border-slate-800/60 transition-all duration-300 ease-out shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.01] bg-white/70 dark:bg-slate-950/40 backdrop-blur-sm p-5">
-          <h3 class="font-semibold text-lg mb-1 text-brand">비트코인 ETF 국내 도입의 필요성 연구</h3>
-          <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">미래내일 일경험 프로젝트(한국경제인협회). 정책·시장 영향 분석 자료.</p>
-          <div class="mt-auto flex items-center gap-2 flex-wrap text-xs text-slate-500 dark:text-slate-400">
-            <span class="px-2 py-1 rounded-full tag">Policy</span>
-            <span class="px-2 py-1 rounded-full tag">ETF</span>
-            <span class="px-2 py-1 rounded-full tag">KR</span>
+    <section class="fade-section mt-10" id="projects">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight">Projects (리서치 & 노트)</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- PDF 모달 프로젝트 -->
+        <a href="docs/bitcoin-etf.pdf" data-pdf="docs/bitcoin-etf.pdf" class="group block">
+          <div class="relative h-full rounded-2xl border border-slate-200/60 dark:border-slate-800/60 transition hover:-translate-y-0.5 hover:shadow-lg bg-white/70 dark:bg-slate-950/40 backdrop-blur p-5">
+            <h3 class="font-semibold text-lg mb-1 text-brand">비트코인 ETF 국내 도입의 필요성 연구</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">미래내일 일경험 프로젝트(한국경제인협회). 정책·시장 영향 분석 자료.</p>
+            <div class="text-xs text-slate-500 dark:text-slate-400">Policy · ETF · KR</div>
           </div>
         </a>
+        <!-- 다른 카드들은 자유롭게 추가 -->
       </div>
     </section>
 
-    <section id="proof" class="mt-10 fade-section">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-4 tracking-tight">그 외 활동 증빙 자료</h2>
-      <div class="grid md:grid-cols-3 gap-4 reveal-enter" id="proof-grid"></div>
+    <section class="fade-section mt-10" id="writing">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight">Writing & Publications</h2>
+      <div class="text-sm text-slate-600 dark:text-slate-300">업데이트 예정</div>
     </section>
 
-    <section id="contact" class="mt-10 mb-16 fade-section">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-4 tracking-tight">Contact</h2>
+    <section class="fade-section mt-10" id="proof">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight">그 외 활동 증빙 자료</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur overflow-hidden">
+          <div class="w-full h-64 grid place-items-center text-xs text-slate-500 dark:text-slate-400">Image</div>
+          <div class="p-4 text-center text-sm text-brand">업비트 서포터즈 우수활동팀(1위) 상장</div>
+        </div>
+        <!-- 필요만큼 추가 -->
+      </div>
+    </section>
+
+    <section class="fade-section mt-10" id="service">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight">병역</h2>
       <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5">
-        <p class="text-slate-700 dark:text-slate-300 mb-4">협업/채용/프로젝트 문의는 언제든 환영합니다. 간단한 소개와 필요 내용을 보내주세요!</p>
-        <form class="grid md:grid-cols-2 gap-3" onsubmit="event.preventDefault(); alert('감사합니다! 메일로 답변드릴게요.');">
-          <input name="name" placeholder="Your name" required class="w-full rounded-xl border px-3 py-2 bg-transparent border-slate-200/60 dark:border-slate-800/60" />
-          <input name="email" type="email" placeholder="Email" required class="w-full rounded-xl border px-3 py-2 bg-transparent border-slate-200/60 dark:border-slate-800/60" />
-          <textarea name="message" placeholder="Message" required class="md:col-span-2 w-full rounded-xl border px-3 py-2 h-28 bg-transparent border-slate-200/60 dark:border-slate-800/60"></textarea>
-          <div class="md:col-span-2 flex justify-end"><button type="submit" class="px-4 py-2 rounded-2xl bg-brand text-white">Send</button></div>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <div class="font-semibold tracking-tight text-brand">대한민국 육군</div>
+            <div class="text-sm text-slate-600 dark:text-slate-300 mt-0.5">병장 · 예비군조교</div>
+          </div>
+          <div class="text-sm text-slate-500 dark:text-slate-400 whitespace-nowrap">2021.02.23 – 2022.08.22</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-section mt-10 mb-16" id="contact">
+      <h2 class="text-3xl font-semibold mb-4 tracking-tight">Contact</h2>
+      <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur p-5">
+        <p class="text-slate-700 dark:text-slate-300 mb-4">협업/채용/프로젝트 문의는 언제든 환영합니다.</p>
+        <form class="grid md:grid-cols-2 gap-3" onsubmit="event.preventDefault(); alert('감사합니다! 메시지를 확인 후 회신드릴게요.');">
+          <input required placeholder="Your name" class="w-full rounded-xl border px-3 py-2 bg-transparent border-slate-200/60 dark:border-slate-800/60">
+          <input required type="email" placeholder="Email" class="w-full rounded-xl border px-3 py-2 bg-transparent border-slate-200/60 dark:border-slate-800/60">
+          <textarea required placeholder="Message" class="md:col-span-2 w-full rounded-xl border px-3 py-2 h-28 bg-transparent border-slate-200/60 dark:border-slate-800/60"></textarea>
+          <div class="md:col-span-2 flex justify-end">
+            <button class="px-4 py-2 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">Send</button>
+          </div>
         </form>
       </div>
     </section>
   </main>
 
+  <!-- 푸터 -->
   <footer class="py-8 border-t border-slate-200/50 dark:border-slate-800/60">
     <div class="mx-auto max-w-6xl px-4 text-sm text-slate-500 dark:text-slate-400 flex flex-wrap items-center gap-4 justify-between">
       <span>© <span id="year"></span> 우수현. All rights reserved.</span>
       <div class="flex items-center gap-4">
-        <a href="mailto:sa0110984@naver.com" class="hover-magnet">✉️ Email</a>
-        <span>📍 Seoul, Korea</span>
+        <a href="mailto:sa0110984@naver.com" class="inline-flex items-center gap-2 hover:text-amber-400 transition"><i data-lucide="mail" class="h-4 w-4"></i>Email</a>
+        <span class="inline-flex items-center gap-2"><i data-lucide="map-pin" class="h-4 w-4"></i>Seoul, Korea</span>
       </div>
     </div>
   </footer>
 
-  <div id="pdf-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pdf-title">
-    <div class="modal-box ring-1 ring-black/10 dark:ring-white/10 flex flex-col">
+  <!-- PDF 모달 -->
+  <div id="pdfModal" class="fixed inset-0 z-[70] bg-black/60 hidden" role="dialog" aria-modal="true">
+    <div class="absolute inset-6 md:inset-10 bg-white dark:bg-slate-950 rounded-2xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10">
       <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200/60 dark:border-slate-800/60">
-        <h4 id="pdf-title" class="font-semibold text-brand">문서 보기</h4>
-        <button id="pdf-close" class="px-3 py-1.5 rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">닫기</button>
+        <h4 id="pdfTitle" class="font-semibold text-brand">문서</h4>
+        <button id="pdfClose" class="px-3 py-1.5 rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">닫기</button>
       </div>
-      <iframe id="pdf-frame" title="PDF" class="w-full" style="height: calc(100vh - 170px);" src=""></iframe>
+      <iframe id="pdfFrame" title="pdf" class="w-full h-[calc(100%-52px)]"></iframe>
     </div>
   </div>
 
   <script>
+    // 아이콘
+    lucide.createIcons();
+
+    // 연도
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // build proof cards
-    const proofGrid = document.getElementById('proof-grid');
-    proofGrid.innerHTML = Array.from({length:5}).map((_,i)=>`
-      <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-white/90 dark:bg-slate-900/60 backdrop-blur overflow-hidden">
-        <div class="w-full h-64 grid place-items-center text-xs text-slate-500 dark:text-slate-400">Image</div>
-        <div class="p-4 text-sm text-center text-brand">증빙 자료 #${i+1}</div>
-      </div>
-    `).join('');
+    // 테마 (system ⇄ light ⇄ dark)
+    (function themeInit(){
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme') || 'system';
+      const apply = (mode)=>{
+        if(mode==='dark'||(mode==='system' && matchMedia('(prefers-color-scheme: dark)').matches)){
+          root.classList.add('dark');
+        }else{
+          root.classList.remove('dark');
+        }
+        localStorage.setItem('theme', mode);
+        updateIcon(mode);
+      }
+      function next(mode){ return mode==='system' ? 'light' : mode==='light' ? 'dark' : 'system'; }
+      function updateIcon(mode){
+        const useDark = mode==='dark'||(mode==='system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.querySelectorAll('#themeBtn i,#themeBtnSm i').forEach(el=>{
+          el.setAttribute('data-lucide', useDark ? 'moon' : 'sun');
+        });
+        lucide.createIcons();
+      }
+      apply(stored);
+      matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>apply(localStorage.getItem('theme')||'system'));
+      function toggle(){
+        apply(next(localStorage.getItem('theme')||'system'));
+      }
+      document.getElementById('themeBtn').onclick = toggle;
+      document.getElementById('themeBtnSm').onclick = toggle;
+    })();
 
-    function smoothScrollTo(targetY, duration=900){
-      const start = window.scrollY;
-      const startTime = performance.now();
-      function ease(t){ return t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2 }
+    // 메인 리빌 + 부드러운 스크롤
+    const mainEl = document.getElementById('main');
+    function revealAndScroll(id){
+      if(mainEl.classList.contains('hidden')){
+        mainEl.classList.remove('hidden');
+        // 첫 페인트 다음 프레임에 스크롤
+        requestAnimationFrame(()=>requestAnimationFrame(()=>scrollToId(id)));
+      }else{
+        scrollToId(id);
+      }
+    }
+    function scrollToId(id, duration=800){
+      const header=document.querySelector('header');
+      const headerH = header? header.offsetHeight : 64;
+      const el = document.querySelector(id);
+      if(!el) return;
+      const anchor = el.querySelector('h1,h2,h3') || el;
+      const rect = anchor.getBoundingClientRect();
+      const targetY = Math.max(0, window.scrollY + rect.top - (headerH + 28));
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduce){ window.scrollTo(0,targetY); return; }
+      const start = window.scrollY, startTime = performance.now();
+      const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
       function step(now){
-        const p = Math.min((now-startTime)/duration, 1);
-        const y = start + (targetY - start) * ease(p);
-        window.scrollTo(0,y);
+        const p = Math.min((now-startTime)/duration,1);
+        window.scrollTo(0, start + (targetY-start)*ease(p));
         if(p<1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
     }
-    function scrollToId(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      const headerH = document.querySelector('header').offsetHeight || 64;
-      const anchor = el.querySelector('h2,h1,h3') || el;
-      const rect = anchor.getBoundingClientRect();
-      const target = window.scrollY + rect.top - (headerH + 28);
-      smoothScrollTo(Math.max(0, target));
-    }
-    function revealMain(){
-      if(document.body.dataset.revealed === 'true') return;
-      document.body.dataset.revealed = 'true';
-      document.getElementById('main').classList.remove('hidden');
-    }
-    document.getElementById('btn-start').addEventListener('click', (e)=>{
+    // 클릭 위임
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('[data-scroll]');
+      if(!a) return;
       e.preventDefault();
-      revealMain();
-      scrollToId('profile');
+      revealAndScroll(a.getAttribute('data-scroll'));
     });
-    document.getElementById('btn-home').addEventListener('click',(e)=>{
-      e.preventDefault();
-      document.body.dataset.revealed = 'false';
-      document.getElementById('main').classList.add('hidden');
-      smoothScrollTo(0);
+    // 로고는 맨 위로
+    document.getElementById('logo').addEventListener('click', (e)=>{
+      e.preventDefault(); mainEl.classList.add('hidden'); scrollTo(0,0);
     });
-    document.querySelectorAll('nav a, aside a').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const href = a.getAttribute('href') || '';
-        if(href.startsWith('#')){
-          e.preventDefault();
-          const id = href.slice(1);
-          revealMain();
-          scrollToId(id);
-        }
-      });
-    });
-    const observer = new IntersectionObserver((entries)=>{
+
+    // 섹션 페이드아웃(프로필 제외)
+    const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         const el = entry.target;
-        const visibleRatio = entry.intersectionRatio;
-        if(visibleRatio < 0.2) el.classList.add('hidden');
-        else el.classList.remove('hidden');
+        if(el.id==='profile') return; // 프로필은 항상 보이도록
+        const ratio = entry.intersectionRatio;
+        if(ratio < 0.25) el.classList.add('fade-out'); else el.classList.remove('fade-out');
       });
-    }, { threshold: [0, 0.2, 0.8, 1] });
-    document.querySelectorAll('.fade-section').forEach(s=>observer.observe(s));
+    }, {threshold:[0,0.25,0.5,1]});
+    document.querySelectorAll('.fade-section').forEach(sec=>io.observe(sec));
 
-    const btnTheme = document.getElementById('btn-theme');
-    const icon = document.getElementById('theme-icon');
-    function setTheme(mode){
-      if(mode==='dark'){ document.documentElement.classList.add('dark'); icon.textContent='🌙'; localStorage.setItem('theme','dark');}
-      else { document.documentElement.classList.remove('dark'); icon.textContent='🌞'; localStorage.setItem('theme','light');}
-    }
-    btnTheme.addEventListener('click', ()=>{
-      const isDark = document.documentElement.classList.contains('dark');
-      setTheme(isDark ? 'light' : 'dark');
+    // PDF 모달
+    const pdfModal = document.getElementById('pdfModal');
+    const pdfFrame = document.getElementById('pdfFrame');
+    const pdfTitle = document.getElementById('pdfTitle');
+    document.getElementById('pdfClose').onclick = ()=>{ pdfModal.classList.add('hidden'); pdfFrame.src=''; };
+    document.addEventListener('click',(e)=>{
+      const a = e.target.closest('a[data-pdf]');
+      if(!a) return;
+      e.preventDefault();
+      const file = a.getAttribute('data-pdf');
+      pdfTitle.textContent = a.querySelector('h3')?.textContent || '문서';
+      pdfFrame.src = 'pdf-viewer.html?file=' + encodeURIComponent(file);
+      pdfModal.classList.remove('hidden');
     });
-
-    const modal = document.getElementById('pdf-modal');
-    const frame = document.getElementById('pdf-frame');
-    const closeBtn = document.getElementById('pdf-close');
-    document.querySelectorAll('[data-embed]').forEach(card=>{
-      card.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const file = card.getAttribute('data-embed');
-        frame.src = 'pdf-viewer.html?file=' + encodeURIComponent(file);
-        modal.classList.add('open');
-      });
-    });
-    closeBtn.addEventListener('click', ()=>{
-      modal.classList.remove('open'); frame.src='';
-    });
-    modal.addEventListener('click', (e)=>{ if(e.target === modal){ modal.classList.remove('open'); frame.src=''; } });
   </script>
 </body>
 </html>
